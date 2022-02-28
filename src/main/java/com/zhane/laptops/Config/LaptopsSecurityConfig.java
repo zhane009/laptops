@@ -56,13 +56,13 @@ public class LaptopsSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "laptops/product/**").permitAll()
-                .antMatchers(HttpMethod.GET, "laptops/cpu/**").permitAll()
-                .antMatchers(HttpMethod.GET, "laptops/graphics/**").permitAll()
-                .antMatchers(HttpMethod.GET, "laptops/manufacturer/**").permitAll()
-                .antMatchers(HttpMethod.GET, "laptops/ram/**").permitAll()
-                .antMatchers(HttpMethod.GET, "laptops/screen/**").permitAll()
-                .antMatchers(HttpMethod.GET, "laptops/storage/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/product/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/cpu/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/graphics/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/manufacturer/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/ram/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/screen/**").permitAll()
+                .antMatchers(HttpMethod.GET, "  /storage/**").permitAll()
                 .anyRequest().fullyAuthenticated();
 
         http.addFilterBefore(
