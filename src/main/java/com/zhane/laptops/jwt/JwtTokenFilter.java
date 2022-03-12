@@ -6,6 +6,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import com.zhane.laptops.Services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
@@ -40,6 +41,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 UserDetails userDetails = null;
 
                 if (URI.contains("account")) {
+                    userDetails = userDetailsService.loadUserByUsername(username);
+                } else {
                     userDetails = userDetailsService.loadUserByUsername(username);
                 }
 

@@ -9,7 +9,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
-    private String email;
     private String password;
     @ManyToMany
     @JoinTable(name = "user_roles",
@@ -17,10 +16,19 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(String username, String password, Set<Role> roles) {
+    @OneToOne
+    @JoinColumn(name = "manufacturer_id", nullable = false)
+    private Manufacturer manufacturer;
+
+    public User(String username, Manufacturer manufacturer, String password, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;
+        this.manufacturer = manufacturer;
+    }
+
+    public User() {
+
     }
 
     public long getId() {
@@ -39,14 +47,6 @@ public class User {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -61,5 +61,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 }

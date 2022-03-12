@@ -36,7 +36,7 @@ public class LaptopsSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(username -> userDetailsService.loadUserByUsername(username)).passwordEncoder(passwordEncoder());
     }
 
     @Bean(name = "userAuthenticationManager")
@@ -62,7 +62,8 @@ public class LaptopsSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/manufacturer/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/ram/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/screen/**").permitAll()
-                .antMatchers(HttpMethod.GET, "  /storage/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/storage/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/**").permitAll()
                 .anyRequest().fullyAuthenticated();
 
         http.addFilterBefore(

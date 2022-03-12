@@ -21,6 +21,9 @@ public class UserRegistrationRequest {
     private String matchingPassword;
 
     @NotNull
+    private String manufacturer;
+
+    @NotNull
     private Set<String> roles;
 
 }
